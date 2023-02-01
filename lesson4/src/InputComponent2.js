@@ -1,0 +1,20 @@
+
+function InputComponent2(){
+    return(
+        <div style = {{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems : 'center',
+            width: '100%',
+            height: '20%',
+            marginTop: '2%',
+        }}>
+            <input type = "password" placeholder = "Mật khẩu" style = {{
+                width: '50%',
+                height: '100%',
+            }} /> 
+        </div>
+    )
+}
+export default InputComponent2
