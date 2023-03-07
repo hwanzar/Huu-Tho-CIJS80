@@ -1,0 +1,45 @@
+.Dish{
+    flex-direction: row ;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.Dish .line{
+    color: black;
+}
+.mainInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mainInfoLeft{
+    display: flex;
+    flex-direction: row;
+}
+.mainInfoRight{
+    height: 100%;
+    width: 150px;
+    gap: 20px;
+}
+.amount{
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+    gap: 10px;
+}
+.amount input{
+    width: 50px;
+}
+.addButton{
+    height: 30%;
+    width: 80%;
+    background-color: orange;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+.addButton:hover{
+    background-color: brown;
+}

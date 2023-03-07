@@ -1,12 +1,20 @@
-import ThemeContext from './ThemeContext';
-import {useContext} from 'react'
+import React from 'react';
 
-const App = () => {
-	return (
-		<ThemeContext.Provider value={{theme: "dark:"}}>
-      <h1>ABCD</h1>
-		</ThemeContext.Provider>
-	)
+export const UserContext = React.createContext();
+
+export default function App() {
+  return (
+    <UserContext.Provider value="ABC">
+      <User />
+    </UserContext.Provider>
+  )
 }
 
-export default App;
+function User() {
+  return (
+    <UserContext.Consumer>
+      {value => <h1>{value}</h1>} 
+      {/* prints: Reed */}
+    </UserContext.Consumer>
+  )
+}

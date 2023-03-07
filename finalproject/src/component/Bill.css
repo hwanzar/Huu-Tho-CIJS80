@@ -1,0 +1,19 @@
+.bill{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 30px;
+    height: 50%;
+    width: 50%;
+    padding: 50px;
+}
+.Item{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.footerBill{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
