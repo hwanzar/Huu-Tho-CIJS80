@@ -5,14 +5,28 @@ import { UserContext } from "./UserContext";
 
 
 function Dish(props) {
-    const { cartCount, setCartCount } = useContext(UserContext);
+    const { cartCount, setCartCount, totalMoney, setTotalMoney } = useContext(UserContext);
     const [value, setValue] = useState(1);
+    const { cart, setCart } = useContext(UserContext);
     const handleChange = ((e) => {
         setValue(e.target.value);
     })
-    const handleAdd = ((e) => {
-        setCartCount(cartCount + Number(value));
-    })
+    const handleAddtoCart = (e) => {
+        e.preventDefault();
+        const item = { name: props.name, price: props.price, amount: value };
+        setTotalMoney(Number(Number(totalMoney) + Number(item.price) * Number(item.amount)).toFixed(2));
+        const itemIndex = cart.findIndex((cartItem) => cartItem.name === item.name);
+        if (item.amount > 0) {
+            if (itemIndex >= 0) {
+                const newCart = [...cart];
+                newCart[itemIndex] = { ...newCart[itemIndex], amount: Number(newCart[itemIndex].amount) + Number(item.amount) };
+                setCart(newCart);
+            } else {
+                setCart([...cart, item]);
+            }
+            setCartCount(cartCount + Number(value));
+        }
+    };
     return (
         <div className="Dish">
             <div className="mainInfo">
@@ -45,9 +59,9 @@ function Dish(props) {
                         <div style={{
                             fontWeight: 'bold',
                         }}>Amount</div>
-                        <input type="number" min="0" defaultValue="1" value={value} onChange={handleChange} />
+                        <input type="number" min={0} defaultValue={1} value={value} onChange={handleChange} />
                     </div>
-                    <button className="addButton" onClick={handleAdd}>
+                    <button className="addButton" onClick={handleAddtoCart}>
                         +Add
                     </button>
                 </div>

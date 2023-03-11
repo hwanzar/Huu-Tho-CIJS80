@@ -11,21 +11,35 @@ import Bill from './component/Bill';
 function App() {
   const [cartCount, setCartCount] = useState(0); // add state for cartCount
   const [billShown, setBillShown] = useState(false);
-  let app;
-  if(billShown){
-    app = "blur"
+  const [formShown, setFormShown] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [totalMoney, setTotalMoney] = useState(0);
+  const [OrderSent, setOrderSent] = useState(false);
+  const [isLoadingIn, setIsLoadingIn] = useState(true);
+  const handleClose = () => {
+    setBillShown(false);
+  };
+  const handleOrder = () => {
+    setFormShown(true);
   }
-  else{
-    app = "App"
+  const handleCancel = () => {
+    setFormShown(false);
+  }
+  const handleOrderSent = () => {
+    setOrderSent(true);
   }
   return (
-    <UserContext.Provider value={{ cartCount, setCartCount ,billShown, setBillShown }}> {/* pass value to UserContext.Provider */}
+    <UserContext.Provider value={{isLoadingIn, setIsLoadingIn ,OrderSent, setOrderSent, cartCount, setCartCount, billShown, setBillShown, cart, setCart, formShown, setFormShown, totalMoney, setTotalMoney }}> 
       <div className="App">
         <Header />
         <Banner />
         <CardDescription />
         <Menu />
-        <Bill />
+        {billShown && (
+          <div className="bill-overlay">
+            <Bill className="bill" handleClose={handleClose} handleOrder={handleOrder} handleCancel={handleCancel}/>
+          </div>
+        )}
       </div>
     </UserContext.Provider>
   );

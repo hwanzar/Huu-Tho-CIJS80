@@ -1,5 +1,5 @@
 .App {
-  background-color: gray;
+  background-color: rgb(254, 255, 185);
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,16 +8,17 @@
   align-items: center;
 }
 
-.blur {
-  background-color: gray;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 1500px;
+.bill-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  align-items: center;
-  filter: blur(10px)
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
 }
+
+
 
 
 .App-logo {

@@ -3,7 +3,7 @@ import './Header.css'
 import { UserContext } from './UserContext';
 const Header = () =>{
     const {cartCount} = useContext(UserContext);
-    const {billShown, setBillShown} = useState(UserContext);
+    const {billShown, setBillShown} = useContext(UserContext);
     const handleChange = () => {
         if(!billShown){
             setBillShown(true);
