@@ -16,6 +16,7 @@ function App() {
   const [totalMoney, setTotalMoney] = useState(0);
   const [OrderSent, setOrderSent] = useState(false);
   const [isLoadingIn, setIsLoadingIn] = useState(true);
+  const [orderSented, setOrderSented] = useState(false);
   const handleClose = () => {
     setBillShown(false);
   };
@@ -28,8 +29,17 @@ function App() {
   const handleOrderSent = () => {
     setOrderSent(true);
   }
+  const FINAL = () => {
+    setBillShown(false);
+    setFormShown(false);
+    setOrderSented(false);
+    setOrderSent(false);
+    setTotalMoney(0);
+    setCartCount(0);
+    setCart([]);
+  }
   return (
-    <UserContext.Provider value={{isLoadingIn, setIsLoadingIn ,OrderSent, setOrderSent, cartCount, setCartCount, billShown, setBillShown, cart, setCart, formShown, setFormShown, totalMoney, setTotalMoney }}> 
+    <UserContext.Provider value={{orderSented, setOrderSented, isLoadingIn, setIsLoadingIn ,OrderSent, setOrderSent, cartCount, setCartCount, billShown, setBillShown, cart, setCart, formShown, setFormShown, totalMoney, setTotalMoney }}> 
       <div className="App">
         <Header />
         <Banner />
@@ -37,7 +47,7 @@ function App() {
         <Menu />
         {billShown && (
           <div className="bill-overlay">
-            <Bill className="bill" handleClose={handleClose} handleOrder={handleOrder} handleCancel={handleCancel}/>
+            <Bill className="bill" FINAL = {FINAL} handleClose={handleClose} handleOrder={handleOrder} handleCancel={handleCancel} handleOrderSent = {handleOrderSent}/>
           </div>
         )}
       </div>

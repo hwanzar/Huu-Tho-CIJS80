@@ -34,8 +34,8 @@ function BillItem(props) {
     );
 }
 
-function Bill({ handleClose, handleOrder, handleCancel }) {
-    const { cart, totalMoney, setCart, setTotalMoney, cartCount, setCartCount, OrderSent } = useContext(UserContext);
+function Bill({ FINAL, handleClose, handleOrder, handleCancel, handleOrderSent }) {
+    const { orderSented, cart, totalMoney, setCart, setTotalMoney, cartCount, setCartCount, OrderSent } = useContext(UserContext);
     const { formShown } = useContext(UserContext);
     const handleIncrement = (index) => {
         const newCart = [...cart];
@@ -49,7 +49,7 @@ function Bill({ handleClose, handleOrder, handleCancel }) {
         let newCart = [...cart];
         const itemAmount = newCart[index].amount;
         setTotalMoney(Number(Number(totalMoney) - Number(newCart[index].price)).toFixed(2));
-        {console.log(newCart[index])}
+        { console.log(newCart[index]) }
         if (itemAmount === 1) {
             newCart[index].amount--;
             newCart = newCart.filter(item => item.amount > 0);
@@ -85,21 +85,18 @@ function Bill({ handleClose, handleOrder, handleCancel }) {
                         <div>Total Amount</div>
                         <div>$ {totalMoney}</div>
                     </div>
-                    {!formShown && <div className="billButton">
+                    {!formShown && !OrderSent && !orderSented && <div className="billButton">
                         <button onClick={handleClose}>Close</button>
                         <button onClick={handleOrder}>Order</button>
                     </div>}
-                    {formShown && <Order handleCancel={handleCancel} />}
+                    {formShown && <Order handleCancel={handleCancel} handleOrderSent={handleOrderSent} />}
                 </div>
             </div>
-
-            <div>
-                Sending order data ...
-            </div>
-            <div>
+            {OrderSent && <div>Sending order data ... </div>}
+            {orderSented && <div>
                 <div>Succesfully sent the order!</div>
-                <button className="finalCloseButton">Close</button>
-            </div>
+                <button className="finalCloseButton" onClick={FINAL}>Close</button>
+            </div>}
         </div>
 
     );

@@ -4,8 +4,9 @@ import './Order.css'
 import { UserContext } from "./UserContext";
 import { useContext } from 'react'
 
-export default function Order({ handleCancel }) {
+export default function Order({ handleCancel, handleOrderSent }) {
     const { cart } = useContext(UserContext)
+    const {setOrderSented} = useContext(UserContext);
     const {
         register,
         handleSubmit,
@@ -19,18 +20,16 @@ export default function Order({ handleCancel }) {
             street,
             postalcode,
             city,
-            /* cart, */
+            cart,
         };
         axios
-            .post("http://localhost:3001/", order)
+            .post("http://localhost:3001/orders", order)
             .then((response) => {
+                setOrderSented(true);
                 console.log(response);
-                alert("Form submitted successfully!");
             })
             .catch((error) => {
-                console.log(error);
                 console.log(order);
-                alert("Error submitting form. Please try again later.");
             });
     };
 
@@ -85,7 +84,7 @@ export default function Order({ handleCancel }) {
                     )}
                 </div>
                 <button className="orderButton" onClick={handleCancel}> Cancel </button>
-                <button type="submit" className="orderButton" >Confirm</button>
+                <button type="submit" className="orderButton" onClick={handleOrderSent} >Confirm</button>
 
             </form>
         </div>

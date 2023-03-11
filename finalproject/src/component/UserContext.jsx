@@ -8,8 +8,9 @@ export const UserProvider = ({ children }) => {
     const [totalMoney, setTotalMoney] = useState(0);
     const [OrderSent, setOrderSent] = useState(false);
     const [isLoadingIn, setIsLoadingIn] = useState(false);
+    const [orderSented, setOrderSented] = useState(false);
     return (
-        <UserContext.Provider value={{isLoadingIn, setIsLoadingIn,OrderSent, setOrderSent, cartCount, setCartCount ,billShown, setBillShown, cart, setCart, formShown, setFormShown, totalMoney, setTotalMoney }}>
+        <UserContext.Provider value={{orderSented, setOrderSented, isLoadingIn, setIsLoadingIn,OrderSent, setOrderSent, cartCount, setCartCount ,billShown, setBillShown, cart, setCart, formShown, setFormShown, totalMoney, setTotalMoney }}>
             {children}
         </UserContext.Provider>
     );
