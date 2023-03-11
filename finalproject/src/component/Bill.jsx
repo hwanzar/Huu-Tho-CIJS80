@@ -63,7 +63,7 @@ function Bill({ FINAL, handleClose, handleOrder, handleCancel, handleOrderSent }
     return (
         <div className="bill">
             <div>
-                {cart.map((item, index) => {
+                {!OrderSent && cart.map((item, index) => {
                     return (
                         <BillItem
                             key={index}
@@ -76,7 +76,7 @@ function Bill({ FINAL, handleClose, handleOrder, handleCancel, handleOrderSent }
                     )
                 })}
                 <div className="footerBill">
-                    <div style={{
+                    {!OrderSent && <div style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
@@ -84,18 +84,23 @@ function Bill({ FINAL, handleClose, handleOrder, handleCancel, handleOrderSent }
                     }}>
                         <div>Total Amount</div>
                         <div>$ {totalMoney}</div>
-                    </div>
+                    </div>}
                     {!formShown && !OrderSent && !orderSented && <div className="billButton">
                         <button onClick={handleClose}>Close</button>
                         <button onClick={handleOrder}>Order</button>
                     </div>}
-                    {formShown && <Order handleCancel={handleCancel} handleOrderSent={handleOrderSent} />}
+                    {formShown && !orderSented && <Order handleCancel={handleCancel} handleOrderSent={handleOrderSent} />}
                 </div>
             </div>
-            {OrderSent && <div>Sending order data ... </div>}
-            {orderSented && <div>
+            {OrderSent && !orderSented && <div>Sending order data ... </div>}
+            {orderSented && <div className="confirmSent">
                 <div>Succesfully sent the order!</div>
-                <button className="finalCloseButton" onClick={FINAL}>Close</button>
+                <div style = {{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                }}>
+                    <button className="finalCloseButton" onClick={FINAL}>Close</button>
+                </div>
             </div>}
         </div>
 

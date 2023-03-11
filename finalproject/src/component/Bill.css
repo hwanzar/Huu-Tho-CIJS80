@@ -67,3 +67,7 @@
     background-color: orange;
     color: white;
 }
+.confirmSent{
+    display: flex;
+    flex-direction: column;
+}

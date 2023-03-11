@@ -27,6 +27,8 @@ export default function Order({ handleCancel, handleOrderSent }) {
             .then((response) => {
                 setOrderSented(true);
                 console.log(response);
+                /* alert("DONE"); */
+                handleOrderSent();
             })
             .catch((error) => {
                 console.log(order);
@@ -84,7 +86,7 @@ export default function Order({ handleCancel, handleOrderSent }) {
                     )}
                 </div>
                 <button className="orderButton" onClick={handleCancel}> Cancel </button>
-                <button type="submit" className="orderButton" onClick={handleOrderSent} >Confirm</button>
+                <button type="submit" className="orderButton" >Confirm</button>
 
             </form>
         </div>
